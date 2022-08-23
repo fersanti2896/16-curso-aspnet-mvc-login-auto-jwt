@@ -1,0 +1,106 @@
+﻿@model Transporte.PaginadorDTO<Transporte.PedidoDTO>
+
+<script type="text/javascript" src="~/js/BandejaPrincipal/ConsultaPedidosGeneral.js"></script>
+
+<h1>Bandeja de Seguimiento</h1>
+<br>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-hover" id="tablaResultadosFinal">
+			<thead>
+				<tr>
+					<th>
+						Estado del pedido
+					</th>
+					<th>
+						Estado de la República
+					</th>
+					<th>
+						Fecha del Pedido
+					</th>
+					<th>
+						Pedido Id
+					</th>
+					<th class="text-center">
+						<button class="btn alert-success my-2 my-sm-0" 
+								type="button"
+							    onmouseover="tooltip.show('Agregar Pedido')"
+								onmouseout="tooltip.hide()"
+								id="agregarPedido"
+								onclick="AgregarPedido(0);tooltip.hide();">
+								<i class="fas fa-plus"></i>
+						</button>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model.Coleccion)
+				{
+					<tr>
+						<td>
+							@Html.DisplayFor(modelItem => item.EstadoPedido)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.EstadoRepublica)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.FechaPedido)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.PedidoId)
+						</td>
+						<td id="@("td_row_"+item.PedidoId)">
+							@if (item.Editar) {
+								<button class="btn alert-success my-2 my-sm-0" 
+									    type="button"
+										onmouseover="tooltip.show('Editar pedido')" 
+										onmouseout="tooltip.hide()"
+										onclick="AgregarPedido(@item.PedidoId);tooltip.hide();">
+									<i class="fas fa-edit"></i>
+								</button>
+								<button class="btn alert-success my-2 my-sm-0" 
+										type="button"
+										onmouseover="tooltip.show('Eliminar pedido')" 
+										onmouseout="tooltip.hide()"
+										onclick="EliminarPedido(@item.PedidoId);tooltip.hide();">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+							}
+
+							@foreach(var opciones in item.Opciones) {
+								<button class="btn alert-success my-2 my-sm-0" 
+										type="button"
+										onmouseover="tooltip.show('@opciones.Value.Accion')"
+										onmouseout="tooltip.hide()"
+										onclick="ActualizarEstadoPedido(@item.PedidoId, @opciones.Key);tooltip.hide();">
+									<i class="@opciones.Value.Icono"></i>
+								</button>								
+							}
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+    </div>
+</div>
+
+<div class="row">
+	@Html.HiddenFor(Model => Model.Pagina.PaginaActual, new { id = "PaginaActual" });
+	@{
+		Model.Pagina.AccionAnterior  = "tooltip.hide();ConsultaPaginaAnterior();";
+		Model.Pagina.AccionSiguiente = "tooltip.hide();ConsultaPaginaSiguiente();";
+		Model.Pagina.AccionConsulta  = "tooltip.hide();ConsultaGrid();";
+	}
+	@await Html.PartialAsync("~/Views/Shared/FooterTabla.cshtml", Model.Pagina);
+</div>
+
+<script type="text/javascript">
+	function ConsultaPaginaSiguiente() {
+		ConsultaGrid(@Model.Pagina.Siguiente);
+	}
+
+	function ConsultaPaginaAnterior() {
+		ConsultaGrid(@Model.Pagina.Anterior);
+	}
+</script>

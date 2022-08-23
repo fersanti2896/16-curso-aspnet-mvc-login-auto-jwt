@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<script type="text/javascript" src="~/js/Graficas/TotalesEstadoRegion.js"></script>
+<!-- Región de trabajo -->
+<div id="panel" data-prefix="TotalesRegionEstado.PDF">
+	<h1 class="text-center">Totales por Región y Estado</h1>
+	<div id="chart-container"></div>
+</div>
+
+<script type="text/javascript">
+	var data = [];
+	var Regiones = [];
+	var Estados = [];
+
+	$(document).ready(function () {
+		RenderizadoGrafica();
+	});
+	
+	function LlenadoData() {
+		data = data.map(function (obj) {
+			return obj;
+		});
+		
+		console.log(data);
+	};
+
+	function ObtenerDatos(datos) {
+		data = datos;
+};
+
+	
+</script>
+
+

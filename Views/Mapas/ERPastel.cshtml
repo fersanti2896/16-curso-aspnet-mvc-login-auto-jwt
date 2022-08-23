@@ -1,0 +1,41 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<script type="text/javascript" src="~/js/Graficas/AgrupadosPedidos.js"></script>
+<!-- Región de trabajo -->
+<div id="panel" data-prefix="TotalesPastel.PDF">
+    <h1 class="text-center">Totales por Estado Pedido</h1>
+    <div class="row">
+        <div class="col-md-7 col-xl-4">
+            <div id="chart" style="width:100%;padding-bottom:20px;"></div>
+        </div>
+        <div class="col-md-5 col-xl-4">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Estado del pedido</th>
+                        <th scope="col">Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody id="CuerpoTabla">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var data = JSON.parse('@Html.Raw(Json.Serialize(ViewBag.Modelo))');
+
+	// Init de la página
+	$(document).ready(function () {
+		LlenadoData();
+		RenderizadoGrafica();
+	});
+</script>

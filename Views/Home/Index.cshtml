@@ -1,0 +1,82 @@
+﻿@*<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+*@
+<div class="form-inline">
+    <div class="form-btn-group mx-sm-3">
+		<select class="form-control" id="SelectEstadosPedido"></select>
+	</div><br />
+	<div class="form-btn-group mx-sm-3">
+		<input type="date" id="start" name="trip-start" class="form-control" value="">
+	</div><br />
+	<div class="form-btn-group mx-sm-3">
+		<input type="date" id="end" name="trip-end" class="form-control" value="">
+	</div>&nbsp;&nbsp;
+    <br />
+    <button class="btn btn-primary" 
+            type="button" 
+            style="border:20px"
+            onmouseover="tooltip.show('Realizar Búsqueda')"
+            onmouseout="tooltip.hide();"
+            onclick="ConsultaGrid()">
+        <i class="far fas fa-sync"></i>    
+    </button>
+</div>
+
+<div class="row" style="padding-top:15px"></div>
+
+<div id="TablaResultados"></div>
+<input id="PedidoId" type="hidden" />
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        /* Se da la fecha de hoy */
+        var now   = new Date();
+        var day   = ("0" + now.getDate()).slice(-2);
+        var mount = ("0" + ( now.getMonth() + 1) ).slice(-2);
+        var today = now.getFullYear() + "-" + (mount) + "-" + (day);
+
+        $("#start").val(today);
+        $("#end").val(today);
+
+        envioGenericos('/ConsultaInformacion/ConsultaEstadosPedidos', null, ConsultaEstadosPedidos);
+
+        ConsultaGrid();
+    })
+
+    function ConsultaGrid(page) {
+        var Pagina = 1;
+
+        if( page != undefined ) {
+            Pagina = page;
+        } else {
+            Pagina = $("#PaginaConsulta").val()
+            
+            if( Pagina == "" ) {
+                Pagina = $("#PaginaActual").val()
+            }
+        }
+
+        /* Se envian las acciones para que los selectores filtren */
+        var modelo = {
+            Pagina:Pagina,
+            FilasPorPagina:6,
+            FechaInicio:$("#start").val(),
+            FechaFin:$("#end").val(),
+            catEstadoPedidoId:$("#SelectEstadosPedido option:selected").val()
+        }
+
+        envioGenericos("/ConsultaInformacion/ConsultaPedidosGeneral", modelo, "TablaResultados");
+    }
+
+    function ConsultaEstadosPedidos(jsonResult) {
+        var opciones = "<option value='0'>TODOS</option>";
+        
+        jsonResult.forEach(function(elem) {
+            opciones += "<option value='" + elem.catEstadoPedidoId + "'>" + elem.estadoPedido + "</option>";
+        })
+
+        $("#SelectEstadosPedido").html(opciones);
+    }
+</script>   

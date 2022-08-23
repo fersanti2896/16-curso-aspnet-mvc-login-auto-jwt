@@ -1,0 +1,41 @@
+﻿    .contenedorTablaDetalle {
+        margin: 2rem auto;
+        border: 1px solid #aaa;
+        height: 170px;
+        overflow: auto;
+        box-sizing: border-box;
+        padding: 0 1rem;
+    }
+
+    /* Estilos para motores Webkit y blink (Chrome, Safari, Opera... )*/
+
+    .contenedorTablaDetalle::-webkit-scrollbar {
+        -webkit-appearance: none;
+    }
+
+    .contenedorTablaDetalle::-webkit-scrollbar:vertical {
+        width: 10px;
+    }
+
+    .contenedorTablaDetalle::-webkit-scrollbar-button:increment, .contenedorTablaDetalle::-webkit-scrollbar-button {
+        display: none;
+    }
+
+    .contenedorTablaDetalle::-webkit-scrollbar:horizontal {
+        height: 10px;
+    }
+
+    .contenedorTablaDetalle::-webkit-scrollbar-thumb {
+        border-radius: 20px;
+        border: 2px solid #f1f2f3;
+    }
+
+    .contenedorTablaDetalle::-webkit-scrollbar-track {
+        border-radius: 10px;
+    }
+
+    .contenedorTablaDetalle {
+        /*Estilos estándar experimentales (Principalmente Firefox)*/
+        scrollbar-color: rgba(0, 0, 0, .5) rgba(0, 0, 0, 0);
+        scrollbar-width: thin;
+    }

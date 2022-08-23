@@ -1,0 +1,42 @@
+﻿@model Transporte.ModeloPaginador
+
+<div class="col-md-3">
+    <label>Total de Registros: @Model.TotalRegistros</label>
+</div>
+
+<div class="col-md-4">
+    <button class="btn btn-outline-success my-2 my-sm-0" 
+            type="button" 
+            style="border-radius:20px"
+            onmouseover="tooltip.show('Pagina Anterior')"
+            onmouseout="tooltip.hide()"
+            onclick="@Model.AccionAnterior">
+        <i class="fas fas fa-angle-left"></i>
+     </button>
+     
+     <label>Ir a la página: </label>
+     <input type="text" minlength="3" style="max-width:40px" id="PaginaConsulta">
+     
+     <button class="btn btn-outline-success my-2 my-sm-0" 
+             type="button" 
+             style="border-radius:20px"
+             onmouseover="tooltip.show('Realizar Búsqueda')"
+             onmouseout="tooltip.hide()"
+             onclick="@Model.AccionConsulta">
+        <i class="fas fas fa-sync"></i>
+     </button>
+
+     <button class="btn btn-outline-success my-2 my-sm-0" 
+             type="button" 
+             style="border-radius:20px"
+             onmouseover="tooltip.show('Pagina Siguiente')"
+             onmouseout="tooltip.hide()"
+             onclick="@Model.AccionSiguiente">
+        <i class="fas fas fa-angle-right"></i>
+     </button>
+</div>
+
+<div class="col-md-4">
+    <label>Página Actual: @Model.PaginaActual</label>
+    <label>Total de Páginas: @Model.TotalPaginas</label>
+</div>

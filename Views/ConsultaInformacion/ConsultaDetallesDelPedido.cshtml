@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Transporte.PedidoDTO>
+
+<link rel="stylesheet" href="~/css/contenedorTablaDetalle.css" />
+
+<div class="col-md-12 contenedorTablaDetalle" style="margin-top:-20px">
+    <table class="table table-fixed" id="tablaRegistrosDetalle">
+    <thead>
+        <tr>
+            <th>
+                Producto
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th class="col-xs-2"></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr id="@("row_" + item.PedidoId)">
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductoConcepto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                <button class="btn alert-success my-2 my-sm-0" type="button"
+                                onmouseover="tooltip.show('Eliminar Producto')"
+                                onmouseout="tooltip.hide();"
+                                onclick="tooltip.hide();EliminarProducto(@item.DetallePedidoId);">
+                            <i class="fa fa-trash-alt"></i>
+                </button>
+                <button class="btn alert-success my-2 my-sm-0" type="button"
+                                onmouseover="tooltip.show('Editar Producto')"
+                                onmouseout="tooltip.hide();"
+                                onclick="tooltip.hide();EditarProducto(@item.CatProductoId, @item.Cantidad);">
+                            <i class="fas fa-edit"></i>
+                            Editar
+                </button>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+</div>
+
+<script type="text/javascript">    
+</script>
+

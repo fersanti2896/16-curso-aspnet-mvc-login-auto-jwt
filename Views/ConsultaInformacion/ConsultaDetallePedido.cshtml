@@ -1,0 +1,37 @@
+﻿@model Transporte.PedidoEdoDTO
+
+<div class="panel">
+    <div class="form-group row">
+        <div class="col-sm-9">
+            <div class="row">
+                <label class="col-sm-6 col-form-label">Estado de la República:</label>
+                <div class="col-sm-6">
+                    <select class="form-control" id="SelectEstadosRepublica"></select>
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-sm-6 col-form-label">Producto:</label>
+                <div class="col-sm-6">
+                    <select class="form-control" id="SelectProducto"></select>
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-sm-6 col-form-label">Cantidad:</label>
+                <div class="col-sm-6">
+                    <input type="number" class="form-control" value="0" id="PedidoCantidad" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <img src="~/images/SIN SELECCION.jpg" id="ImagenProducto" style="width:130px;height:130px;" />
+        </div>
+    </div>
+    
+    <div class="form-group row">
+        <div class="col-sm-12" id="TablaDetallePedido" style="padding-top:15px"></div>
+        @Html.HiddenFor(Model => Model.CatEstadoRepublicaId, new { id = "CatEstadoRepublicaId" })
+    </div>
+</div>
