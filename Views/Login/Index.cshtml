@@ -1,0 +1,60 @@
+﻿
+<link rel="stylesheet" href="~/css/login.css" />
+
+<div class="layout" id="layoutPrincipal">
+    <div class="container" id="contenedorPrincipal">
+        <div class="row" style="width:100%">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="card text-center" style="padding:20px">
+                    <h3>Central de Surtido a Bodegas</h3>
+                    <form style="padding:10px">
+                        <div class="form-group" style="text-align:start">
+                            <input type="text" 
+                                   placeholder="Usuario" 
+                                   id="usuarioSistema" 
+                                   class="form-control" />
+                        </div>
+                        <br />
+                        <div class="form-group" style="text-align:start">
+                            <input type="password" 
+                                   placeholder="Contraseña" 
+                                   id="passwordSistema" 
+                                   class="form-control" />
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <button class="btn btn-primary mr-2 btn-login" 
+                                    type="button"
+                                    onmouseover="tooltip.show('Inicio de Sesión')"
+                                    onmouseout="tooltip.hide()"
+                                    onclick="tooltip.hide();LoginSistema()"> 
+                                <i class="fas fa-sign-in-alt" aria-hidden="true"></i>     
+                                Login
+                             </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function LoginSistema() {
+        var modelo = {
+            UsuarioName: $("#usuarioSistema").val(),
+            Password: $("#passwordSistema").val()
+        }
+
+        envioGenericos("/Login/ValidacionCredenciales", modelo, ResultadoLogin);
+    }
+
+    function ResultadoLogin(resultado) {
+        if(!resultado) {
+            MensajeError("Favor de revisar credenciales");
+        } else{
+            localStorage.setItem("token", resultado);
+            window.location = "../Home/Index";
+        }
+    }
+</script>

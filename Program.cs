@@ -27,6 +27,8 @@ builder.Services.AddScoped<IConsultaGraficaService, ConsultaGraficaService>();
 builder.Services.AddScoped<IConsultaGraficaRepository, ConsultaGraficaRepository>();
 builder.Services.AddScoped<IConsultaPedidoService, ConsultaPedidoService>();
 builder.Services.AddScoped<IConsultaPedidoRepository, ConsultaPedidoRepository>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
 var app = builder.Build();
 
@@ -55,6 +57,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}");
+    pattern: "{controller=Login}/{action=Index}");
 
 app.Run();

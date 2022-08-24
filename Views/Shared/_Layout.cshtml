@@ -29,57 +29,59 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Pedidos</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Mapas" asp-action="EstadosRepublicas">Estados República</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Mapas" asp-action="ERPastel">Mapas Estados República</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Mapas" asp-action="TotalesEstadoRep">Totales Estados República</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Mapas" asp-action="TotalesEstadosRegion">Totales República Region</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Mapas" asp-action="TotalesEstadosGrupos">Totales República Grupos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Mapas" asp-action="MapaMexico">Mapa México</a>
-                        </li>
-                    </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="button"
-                                onmouseover="tooltip.show('Descargar documento de la gráfica en formato PDF')"
+        @if (string.IsNullOrEmpty(ViewBag.SinSesion)) {
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+                <div class="container-fluid">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Pedidos</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Mapas" asp-action="EstadosRepublicas">Estados República</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Mapas" asp-action="ERPastel">Mapas Estados República</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Mapas" asp-action="TotalesEstadoRep">Totales Estados República</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Mapas" asp-action="TotalesEstadosRegion">Totales República Region</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Mapas" asp-action="TotalesEstadosGrupos">Totales República Grupos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Mapas" asp-action="MapaMexico">Mapa México</a>
+                            </li>
+                        </ul>
+                        <form class="form-inline my-2 my-lg-0">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="button"
+                                    onmouseover="tooltip.show('Descargar documento de la gráfica en formato PDF')"
+                                    onmouseout="tooltip.hide();"
+                                    onclick="tooltip.hide();GenerarPDF();">
+                                <i class="fa fa-file-pdf"></i>
+                                Descarga
+                            </button>
+                            <br />
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="button" 
+                                onmouseover="tooltip.show('Generar vista previa de la gráfica')"
                                 onmouseout="tooltip.hide();"
-                                onclick="tooltip.hide();GenerarPDF();">
-                            <i class="fa fa-file-pdf"></i>
-                            Descarga
-                        </button>
-                        <br />
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="button" 
-                            onmouseover="tooltip.show('Generar vista previa de la gráfica')"
-                            onmouseout="tooltip.hide();"
-                            onclick="tooltip.hide();GenerarVisorPDF();" >
-                            <i class="fa fa-save"></i>
-                            Vista previa
-                        </button>
-                    </form>
+                                onclick="tooltip.hide();GenerarVisorPDF();" >
+                                <i class="fa fa-save"></i>
+                                Vista previa
+                            </button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        }
     </header>
     <div class="contenedor">
         @RenderBody()

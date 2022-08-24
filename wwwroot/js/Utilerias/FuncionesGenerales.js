@@ -125,7 +125,7 @@ function MensajeError(msg) {
         content: wrapper
     });
 
-    $(".swal-button").addClass("btn-danger");
+    $(".swal-button").addClass("swal-button--danger");
 }
 
 function MensajeExito(msg) {
