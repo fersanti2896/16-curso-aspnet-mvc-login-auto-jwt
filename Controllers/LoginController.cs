@@ -1,14 +1,18 @@
 ﻿using Dominio.IServicios;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Pedidos.Utils;
 using System.Threading.Tasks;
 using Transporte;
 
 namespace Pedidos.Controllers {
     public class LoginController : Controller {
         private readonly IUsuarioService _usuarioService;
+        private readonly IConfiguration _config;
 
-        public LoginController(IUsuarioService usuarioService) { 
+        public LoginController(IUsuarioService usuarioService, IConfiguration configuration) { 
             _usuarioService = usuarioService;
+            _config = configuration;    
         }
         public IActionResult Index() {
             ViewBag.SinSesion = "OK";
@@ -25,7 +29,7 @@ namespace Pedidos.Controllers {
                     return Json(false);
                 }
 
-                var token = "token";
+                var token = JwtConfigurator.GetToken(usuario, _config);
 
                 return Json(token);
             }
